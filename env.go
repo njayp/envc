@@ -8,20 +8,23 @@ import (
 
 type envKey struct{}
 
-func WithEnv[T any](ctx context.Context) context.Context {
+func Env[T any]() T {
 	var e T
 	err := env.Set(&e)
 	if err != nil {
 		panic(err)
 	}
+	return e
+}
 
-	return context.WithValue(ctx, envKey{}, e)
+func WithEnv[T any](ctx context.Context) context.Context {
+	return context.WithValue(ctx, envKey{}, Env[T]())
 }
 
 func GetEnv[T any](ctx context.Context) T {
 	e, ok := ctx.Value(envKey{}).(T)
 	if !ok {
-		panic("no value found in ctx for envcKey")
+		panic("GetEnv error: no value found in ctx")
 	}
 	return e
 }
