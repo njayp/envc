@@ -8,6 +8,7 @@ gen: gen-go
 
 .PHONY: gen-go
 gen-go:
+	go get -u ./...
 	go mod tidy
 	go generate ./...
 
