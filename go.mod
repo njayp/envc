@@ -1,4 +1,4 @@
-module github.com/njayp/envc
+module github.com/njayp/gcm
 
 go 1.22.1
 
