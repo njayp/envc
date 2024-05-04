@@ -1,8 +1,12 @@
 Feb 17, 2024
 
-## Mutating the context of a gRPC Server
+## gRPC Server Context Mutation
 
-It was a bit frustrating that gRPC server contexts are generated from `context.Background`, and not as a child of provided context, so I made a small library that utilitzes an interceptor to mutate the server context.
+It was a bit frustrating that gRPC server contexts are generated from `context.Background`, and not as a child of provided context, so I made a small library that utilizes an interceptor to mutate the server context. The mutation signature is
+
+```go
+type CtxMut func(context.Context) context.Context
+```
 
 ### Stream Interceptor
 
